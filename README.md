@@ -303,7 +303,7 @@ Users are solely responsible for their own trading decisions and should consult 
 License
 MIT License - Free use modification and distribution with attribution
 
-Copyright 2026 Shrey Patel
+Copyright 2026 Shrey Jain
 
 Contact
 GitHub: github.com/Shrey6876/stock-price-prediction-gru
