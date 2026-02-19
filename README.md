@@ -1,312 +1,306 @@
-Stock Price Prediction Using GRU Neural Networks
-Advanced deep learning system for financial time series forecasting achieving institutional-grade accuracy and risk-adjusted returns.
+<![CDATA[<div align="center">
 
-Executive Summary
-This project implements a production-grade stock price prediction system using Gated Recurrent Unit neural networks achieving 1.95 percent Mean Absolute Percentage Error across multiple securities substantially exceeding industry benchmarks of 5 to 8 percent. The system demonstrates cross-stock generalization where a single model trained on Amazon data successfully predicts IBM and Microsoft prices with comparable accuracy.
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:1a1b27,50:2e9ef7,100:58a6ff&height=180&section=header&text=Stock%20Price%20Prediction&fontSize=42&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=GRU%20Neural%20Network%20%7C%20Cross-Stock%20Generalization%20%7C%20Production-Grade&descSize=16&descAlignY=55&descColor=c9d1d9" width="100%" />
 
-Backtesting shows 17.55 percent average returns with 53 percent win rate and Sharpe ratio of 1.45. The system combines rigorous academic methodology realistic transaction cost modeling and professional institutional standards.
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=flat-square&logo=tensorflow&logoColor=white)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=flat-square&logo=scikitlearn&logoColor=white)
+![Pandas](https://img.shields.io/badge/Pandas-150458?style=flat-square&logo=pandas&logoColor=white)
+![NumPy](https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=numpy&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
+![Status](https://img.shields.io/badge/Status-Complete-brightgreen?style=flat-square)
+![Last Commit](https://img.shields.io/github/last-commit/Shrey6876/stock-price-prediction-gru?style=flat-square&color=blue)
 
-Key Features
-Cross-Stock Generalization
-Single model trained on AMZN successfully predicts IBM and MSFT with similar accuracy enabling instant scaling to hundreds of securities without retraining. MAPE variance across stocks remains below 0.7 percentage points.
+</div>
 
-20 Technical Indicators
-Comprehensive feature engineering across five categories: trend indicators including moving averages MACD and price rate of change, volatility indicators including Bollinger Bands and historical volatility, momentum indicators including RSI and daily returns, volume indicators including volume moving average and volume-price trend, and derived features measuring distance from equilibrium.
+---
 
-Realistic Backtesting
-Transaction costs include 0.1 percent commission per trade and 0.05 percent slippage for bid-ask spread. Total round-trip cost of 0.15 percent ensures backtested performance translates to live trading.
+> **Production-grade stock price prediction** using Gated Recurrent Unit neural networks, achieving **1.95% MAPE** — placing in the **top 10% of published research**. A single model trained on Amazon generalizes to IBM and Microsoft with comparable accuracy.
 
-Production Architecture
-Inference speed of 0.23 seconds for 205 predictions with 287 MB memory footprint. System scales linearly to 500 plus stocks enabling real-time trading signal generation.
+<br/>
 
-Performance Metrics
-Accuracy Summary
+## 🏆 Performance Summary
 
-Average MAPE: 1.95 percent versus industry benchmark 5 to 8 percent
-Average R-squared: 0.9238 explaining 92 percent of price variance
-Average MAE: 2.15 dollars per prediction
-Signal Precision: 84.2 percent directional accuracy
+<table>
+<tr>
+<td width="50%">
 
-Results by Stock
+### 📈 Accuracy Metrics
 
-Amazon: 1.89 percent MAPE with 0.9247 R-squared and 18.75 percent backtest return
-IBM: 2.31 percent MAPE with 0.8956 R-squared and 12.34 percent backtest return
-Microsoft: 1.65 percent MAPE with 0.9512 R-squared and 21.56 percent backtest return
+| Stock | MAPE | R² | Return |
+|:---|:---:|:---:|:---:|
+| **Amazon** | 1.89% | 0.9247 | +18.75% |
+| **Microsoft** | 1.65% | 0.9512 | +21.56% |
+| **IBM** | 2.31% | 0.8956 | +12.34% |
+| **Average** | **1.95%** | **0.9238** | **17.55%** |
 
-Risk Metrics
+> Industry benchmark MAPE: 5–8%
 
-Sharpe Ratio: 1.45 excellent risk-adjusted returns
-Profit Factor: 1.87 total wins exceed losses by 87 percent
-Maximum Drawdown: 23.4 percent manageable temporary decline
-Win Rate: 53 percent across all trades
+</td>
+<td width="50%">
 
-Technical Architecture
-Model Structure
+### 🛡️ Risk Metrics
 
-Two-layer GRU neural network with 64 hidden units per layer
-Input: 20 timesteps by 20 features creating 400 dimensions
-Dropout regularization at 0.2 rate between layers
-Sigmoid output activation constraining predictions to normalized range
-Total parameters: 31425 trainable weights
+| Metric | Value | Rating |
+|:---|:---:|:---|
+| **Sharpe Ratio** | 1.45 | ✅ Excellent (S&P 500 ~0.5) |
+| **Sortino Ratio** | 2.10 | ✅ Superior upside |
+| **Profit Factor** | 1.87 | ✅ +87% win/loss |
+| **Max Drawdown** | 23.4% | ⚠️ Moderate |
+| **Win Rate** | 53% | ✅ Positive expectancy |
 
-Training Configuration
+</td>
+</tr>
+</table>
 
-Optimizer: Adam with 0.001 learning rate
-Loss Function: Mean Squared Error
-Batch Size: 32 samples
-Early Stopping: Patience 10 epochs monitoring validation loss
-Training Time: 272 seconds on GPU
-Final training loss: 0.0012 with validation loss 0.0018
+---
 
-Dataset
-Source: Yahoo Finance API via yfinance library
+## 📑 Table of Contents
 
-Period: January 1 2019 to January 1 2024 covering 5 years and 1252 trading days
+- [Performance Summary](#-performance-summary)
+- [Architecture](#️-architecture)
+- [Feature Engineering](#-feature-engineering)
+- [Quick Start](#-quick-start)
+- [Results Deep Dive](#-results-deep-dive)
+- [Signal Generation](#-signal-generation)
+- [Backtesting](#-backtesting-framework)
+- [Limitations & Future Work](#️-limitations)
+- [Credits](#-credits)
 
-Securities: Amazon Inc AMZN, IBM Corporation IBM, Microsoft Corporation MSFT
+---
 
-Data Quality: Zero missing values with complete price and volume data
+## 🏗️ Architecture
 
-Split: 80 percent training approximately 1000 days and 20 percent testing approximately 250 days with strict temporal ordering
+```mermaid
+graph TD
+    A[Yahoo Finance API] -->|5yr OHLCV| B[Data Pipeline]
+    B -->|"20 Features"| C["Sequence Generator<br/>(20 timesteps × 20 features)"]
+    C --> D["GRU Layer 1<br/>(64 units)"]
+    D -->|Dropout 0.2| E["GRU Layer 2<br/>(64 units)"]
+    E --> F[Dense Output]
+    F --> G{Signal Engine}
+    G -->|"> +0.5%"| H[📈 BUY]
+    G -->|"< -0.5%"| I[📉 SELL]
+    G -->|"±0.5%"| J[⏸️ HOLD]
+    
+    style A fill:#1a1b27,stroke:#58a6ff,color:#c9d1d9
+    style D fill:#1a1b27,stroke:#f97583,color:#c9d1d9
+    style E fill:#1a1b27,stroke:#f97583,color:#c9d1d9
+    style H fill:#238636,stroke:#2ea043,color:#ffffff
+    style I fill:#da3633,stroke:#f85149,color:#ffffff
+    style J fill:#6e7681,stroke:#8b949e,color:#ffffff
+```
 
-Installation
-System Requirements
+### Model Specifications
 
-Python 3.8 or higher
-8 GB RAM minimum 16 GB recommended
-2 GB disk space 5 GB recommended
-GPU optional but speeds training 10 to 15 times
+| Parameter | Value |
+|:---|:---|
+| Architecture | 2-layer GRU, 64 hidden units/layer |
+| Input Shape | (20, 20) — 20 timesteps × 20 features |
+| Regularization | Dropout 0.2 between layers |
+| Optimizer | Adam (lr=0.001) |
+| Loss Function | Mean Squared Error |
+| Early Stopping | Patience 10, monitoring val_loss |
+| Total Parameters | 31,425 trainable weights |
+| Training Time | ~272s on GPU |
 
-Quick Start
+---
 
-text
+## 🔧 Feature Engineering
+
+<table>
+<tr>
+<td width="50%">
+
+### Trend Indicators
+- Moving Averages (7, 21, 50-day)
+- MACD (convergence/divergence)
+- Price Rate of Change
+
+### Volatility Indicators
+- Bollinger Bands (upper, lower, width)
+- Historical Volatility (10-day rolling σ)
+- High-Low Range
+
+</td>
+<td width="50%">
+
+### Momentum Indicators
+- RSI (14-period)
+- Daily Returns
+- Lag-5 Returns
+- Cumulative Returns
+
+### Volume & Derived
+- Volume Moving Average (20-day)
+- Volume-Price Trend
+- Distance from MA50
+
+</td>
+</tr>
+</table>
+
+> **20 total features** across 5 categories, engineered from raw OHLCV data
+
+---
+
+## 🚀 Quick Start
+
+```bash
+# Clone the repository
 git clone https://github.com/Shrey6876/stock-price-prediction-gru.git
 cd stock-price-prediction-gru
+
+# Install dependencies
 pip install -r requirements.txt
+
+# Run the complete pipeline
 python gru_stock_predictor.py
-Dependencies
+```
 
-yfinance 0.2.0 or higher for financial data download
-tensorflow 2.10.0 or higher for deep learning framework
-scikit-learn 1.0.0 or higher for preprocessing and metrics
-pandas 1.5.0 or higher for data manipulation
-numpy 1.23.0 or higher for numerical computing
-matplotlib 3.5.0 or higher for visualization
-seaborn 0.12.0 or higher for statistical plotting
+> ⏱️ **Execution time:** 5–10 minutes depending on hardware
 
-Usage
-Basic Execution
+### Generated Outputs
 
-Run complete pipeline with single command:
+| Output | Description |
+|:---|:---|
+| `*.png` | Price trends, volume analysis, training curves, prediction plots |
+| `*.csv` | Raw stock data, performance metrics |
+| `*.h5` | Trained GRU model weights |
+| `*.pkl` | Fitted normalization scaler |
 
-text
-python gru_stock_predictor.py
-This executes all phases: downloads historical data, engineers 20 technical indicators, normalizes and creates sequences, trains GRU model on AMZN, tests on IBM and MSFT, generates trading signals, performs backtesting, creates visualizations, and outputs performance metrics.
+### Dependencies
 
-Execution time: 5 to 10 minutes depending on hardware
+| Package | Version | Purpose |
+|:---|:---:|:---|
+| `tensorflow` | ≥ 2.10.0 | GRU neural network |
+| `yfinance` | ≥ 0.2.0 | Financial data API |
+| `scikit-learn` | ≥ 1.0.0 | Preprocessing & metrics |
+| `pandas` | ≥ 1.5.0 | Data manipulation |
+| `numpy` | ≥ 1.23.0 | Numerical computing |
+| `matplotlib` | ≥ 3.5.0 | Static visualizations |
+| `seaborn` | ≥ 0.12.0 | Statistical plotting |
 
-Generated Outputs
+### System Requirements
 
-Visualizations: price trends, volume analysis, training history, predictions versus actuals, scatter accuracy plots
-Data files: raw stock data CSV, performance metrics report
-Model files: trained neural network H5 file, normalization scaler pickle file
+- Python 3.8+
+- 8 GB RAM (16 GB recommended)
+- GPU optional (10–15× speedup)
 
-Results Analysis
-Amazon Performance
+---
 
-MAPE of 1.89 percent means for every 100 dollars in stock price average error is 1.89 dollars. R-squared of 0.9247 captures 92.47 percent of variance. Model correctly predicted direction on 63.4 percent of test days. Backtesting generated 18.75 percent return across 15 trades with 53.3 percent win rate.
+## 📊 Results Deep Dive
 
-IBM Performance
+<details>
+<summary><b>🔬 Statistical Significance</b></summary>
 
-MAPE of 2.31 percent reflects slightly lower accuracy but still excellent for stable dividend stock. MAE of 1.87 dollars lower than Amazon despite higher percentage error due to lower stock price. Backtesting achieved 12.34 percent return across 12 trades with 50 percent win rate.
+| Test | Result | Interpretation |
+|:---|:---:|:---|
+| Binomial test (63.4% accuracy) | p < 0.0001 | Rejects random chance |
+| Pearson correlation | r = 0.96, p < 0.0001 | Near-perfect linear fit |
+| Durbin-Watson statistic | 1.98 | White noise residuals ✅ |
 
-Microsoft Performance
+</details>
 
-Best performer with 1.65 percent MAPE and 0.9512 R-squared explaining 95.12 percent of variance. Superior accuracy likely reflects strong fundamental business performance and predictable institutional ownership patterns. Backtesting delivered 21.56 percent return across 18 trades with 55.6 percent win rate.
+<details>
+<summary><b>📊 Comparative Analysis</b></summary>
 
-Statistical Significance
+| Method | MAPE | Return | Win Rate |
+|:---|:---:|:---:|:---:|
+| **This GRU System** | **1.95%** | **17.55%** | **53%** |
+| Published median | 5.8% | — | — |
+| Commercial average | — | 10–15% | 60–75% |
+| ARIMA | 6.2% | 4.3% | — |
+| MA Crossover | — | Negative | 49.8% |
+| RSI Trading | — | 4.3% | 51.2% |
 
-Binomial hypothesis test with 63.4 percent correct directions yields p-value less than 0.0001 rejecting null hypothesis of random chance. Pearson correlation between predicted and actual prices reaches 0.96 with p-value less than 0.0001. Durbin-Watson statistic of 1.98 confirms residuals are white noise without systematic patterns.
+</details>
 
-Signal Generation
-Signal Logic
+---
 
-BUY signal when predicted price increase exceeds 0.5 percent
-SELL signal when predicted price decrease exceeds 0.5 percent
-HOLD signal when predicted movement falls between thresholds
+## 📡 Signal Generation
 
-Signal Quality
+```
+Signal Logic:
+  BUY  → predicted increase > +0.5%
+  SELL → predicted decrease > -0.5%
+  HOLD → movement within ±0.5%
 
-Total signals across three stocks: 605 total with 205 directional and 400 hold
-Average precision: 84.2 percent meaning four of five directional signals correct
-Average recall: 78.9 percent capturing nearly 80 percent of profitable opportunities
-False positive rate: 15.8 percent keeping incorrect signals low
+Signal Quality (across 3 stocks):
+  Total signals:     605 (205 directional + 400 hold)
+  Precision:         84.2%  (4/5 directional signals correct)
+  Recall:            78.9%  (captures ~80% of opportunities)
+  False positive:    15.8%
+```
 
-High proportion of HOLD signals demonstrates prudent signal generation waiting for high-confidence opportunities rather than overtrading.
+> High HOLD proportion demonstrates **prudent signal generation** — the system waits for high-confidence setups rather than overtrading.
 
-Technical Indicators
-Trend Category
-Moving Average 7-day 21-day and 50-day for multi-timeframe trend assessment
-MACD for momentum and convergence divergence patterns
-Price Rate of Change for velocity measurement
+---
 
-Volatility Category
-Historical Volatility as 10-day rolling standard deviation
-Bollinger Bands upper lower and width for extreme condition detection
-High-Low Range for intraday volatility
+## 💼 Backtesting Framework
 
-Momentum Category
-RSI 14-period for overbought oversold identification
-Daily Returns for day-over-day momentum
-Lag-5 Returns for delayed signals
-Cumulative Returns for long-term trend strength
+| Parameter | Value |
+|:---|:---|
+| Commission | 0.1% per trade |
+| Slippage | 0.05% bid-ask spread |
+| Round-trip cost | 0.15% total |
+| Starting capital | $10,000 per stock |
+| Avg. final value | $11,755 |
+| Avg. trades | 15 per stock |
+| Avg. profit/trade | $116 |
 
-Volume Category
-Raw Volume for participation measurement
-Volume MA 20-day for smoothed participation trends
-Volume-Price Trend for correlation analysis
+---
 
-Derived Features
-Distance from MA50 measuring deviation from equilibrium
-Extended 5-Day Feature capturing short-term acceleration
+## ⚠️ Limitations
 
-Backtesting Framework
-Transaction Costs
+| Limitation | Impact |
+|:---|:---|
+| Historical data dependency | May underperform during regime changes |
+| No black swan modeling | Cannot predict pandemics, crises, geopolitical events |
+| No fundamental data | Misses earnings surprises, M&A, macro shifts |
+| Large-cap only | Not suitable for illiquid/small-cap securities |
+| Daily resolution | Misses intraday opportunities and gap risk |
 
-Commission: 0.1 percent per trade
-Slippage: 0.05 percent bid-ask spread
-Total round-trip cost: 0.15 percent
+---
 
-Execution Logic
+## 🔮 Future Roadmap
 
-Day 1: Model generates prediction at market close
-Day 2: Order executes at market open
-Position held until next signal
-Exit at subsequent signal day
+- [ ] **Hyperparameter optimization** — grid search / Bayesian methods
+- [ ] **Ensemble modeling** — combine GRU + LSTM + XGBoost
+- [ ] **Sentiment analysis** — integrate news and social media data
+- [ ] **Reinforcement learning** — optimal position sizing
+- [ ] **Multi-asset expansion** — bonds, currencies, commodities
+- [ ] **High-frequency adaptation** — minute-level data
 
-Results Summary
+---
 
-Starting capital: 10000 dollars per stock
-Average final value: 11755 dollars
-Average return: 17.55 percent over 6 months
-Average trades: 15 per stock
-Average profit per trade: 116 dollars
-Win rate: 53 percent
+## 🙏 Credits
 
-Risk Assessment
-Sharpe Ratio 1.45
-Substantially exceeds S and P 500 typical 0.4 to 0.6 indicating superior risk-adjusted returns
+**Open Source:** TensorFlow/Keras, scikit-learn, pandas, NumPy, matplotlib, seaborn, yfinance
 
-Profit Factor 1.87
-Total wins exceed total losses by 87 percent demonstrating positive expectancy
+**Academic Foundations:** Hochreiter & Schmidhuber (1997) — LSTM · Cho et al. (2014) — GRU · Graves (2013) — RNN Sequence Modeling
 
-Maximum Drawdown 23.4 percent
-Largest peak-to-trough decline requiring tolerance for temporary unrealized losses
+**Financial Domain:** Murphy (1999) — Technical Analysis · Harris (2003) — Trading & Exchanges
 
-Sortino Ratio 2.10
-Higher than Sharpe indicating asymmetric returns with better upside than downside
+---
 
-Information Ratio 1.87
-Demonstrates genuine alpha generation beyond benchmark returns
+## ⚖️ Disclaimer
 
-Comparative Analysis
-Versus Academic Research
-Median published MAPE: 5.8 percent
-This project MAPE: 1.95 percent
-Ranking: Top 10 percent of published research
+> This project represents **academic research and educational analysis** — not financial advice. Past performance does not guarantee future results. Users are solely responsible for their own trading decisions and should consult licensed financial advisors before deploying real capital.
 
-Versus Commercial Systems
-Industry average return: 10 to 15 percent
-This project return: 17.55 percent
-Industry average precision: 60 to 75 percent
-This project precision: 84.2 percent
+---
 
-Versus Classical Methods
-ARIMA: 6.2 percent MAPE and 4.3 percent return
-Moving Average Crossover: 49.8 percent win rate and negative return
-RSI Trading: 51.2 percent win rate and 4.3 percent return
-This GRU system substantially outperforms all alternatives
+## 📄 License
 
-Documentation
-Primary Resources
+MIT License — Copyright © 2026 Shrey Jain
 
-README.md: Complete technical and usage documentation
-INSTITUTIONAL_RESEARCH_REPORT.md: 25000 plus word academic research report with detailed methodology performance analysis risk assessment implementation roadmap and complete credits
+---
 
-Code Documentation
+<div align="center">
 
-Inline comments throughout explaining logic
-Docstrings for major functions
-Section headers organizing phases
+**Built by [Shrey Jain](https://github.com/Shrey6876)** — AI & Finance Researcher
 
-Limitations
-Historical Data Dependency
-Model trained on 2019 to 2024 data may not perform during regime changes or unprecedented market conditions
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:1a1b27,50:2e9ef7,100:58a6ff&height=100&section=footer" width="100%" />
 
-Black Swan Events
-Cannot predict events outside historical experience such as pandemics financial crises or geopolitical conflicts
-
-News Events
-Technical indicators do not capture fundamental business developments like earnings surprises or merger announcements
-
-Liquidity Assumptions
-Optimized for highly liquid large-cap stocks not suitable for small-cap or illiquid securities
-
-Temporal Resolution
-Daily predictions miss intraday opportunities and overnight gap risks
-
-Future Enhancements
-Short-Term
-Hyperparameter optimization through grid search or Bayesian methods
-Additional technical indicators including Stochastic Oscillator and Money Flow Index
-Rolling window retraining to adapt to market regime changes
-
-Mid-Term
-Ensemble modeling combining GRU with LSTM and XGBoost
-External data integration including macroeconomic indicators and sentiment analysis
-Meta-learning for regime classification and adaptive parameter selection
-
-Long-Term
-Reinforcement learning for optimal position sizing and action selection
-Multi-asset class expansion to bonds currencies and commodities
-High-frequency trading adaptation with minute-level data
-Portfolio optimization across 50 to 100 stocks simultaneously
-
-Credits
-Open Source Libraries
-TensorFlow and Keras for deep learning framework
-scikit-learn for machine learning utilities
-pandas and NumPy for data manipulation
-matplotlib and seaborn for visualization
-yfinance for financial data download
-
-Academic Research
-Hochreiter and Schmidhuber 1997 for LSTM foundation
-Cho et al 2014 for GRU architecture
-Graves 2013 for RNN sequence modeling
-Goodfellow Bengio Courville 2016 for deep learning theory
-
-Financial Domain Knowledge
-Murphy 1999 Technical Analysis of Financial Markets
-Harris 2003 Trading and Exchanges for market microstructure
-
-Perplexity AI
-Substantial assistance throughout project development including research literature synthesis, technical problem solving, code optimization and improvement, documentation enhancement, methodology validation, academic rigor assurance, and professional report generation
-
-This research represents synthesis and extension of established knowledge from quantitative finance computer science and machine learning communities. All sources are acknowledged with proper attribution maintaining academic integrity.
-
-Disclaimer
-This project represents academic research and educational analysis not financial advice or investment recommendations. All projections and backtested returns represent historical or simulated performance. Past performance does not guarantee future results. Actual live trading performance will likely differ from backtested results.
-
-Users are solely responsible for their own trading decisions and should consult licensed financial advisors before deploying real capital. All trading involves risk of capital loss.
-
-License
-MIT License - Free use modification and distribution with attribution
-
-Copyright 2026 Shrey Jain
-
-Contact
-GitHub: github.com/Shrey6876/stock-price-prediction-gru
-
-For issues or questions create GitHub issue with detailed description including Python version TensorFlow version operating system and error traceback if applicable.
-
+</div>
+]]>
