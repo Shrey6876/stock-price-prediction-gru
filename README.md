@@ -1,15 +1,15 @@
-<![CDATA[<div align="center">
+<div align="center">
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:1a1b27,50:2e9ef7,100:58a6ff&height=180&section=header&text=Stock%20Price%20Prediction&fontSize=42&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=GRU%20Neural%20Network%20%7C%20Cross-Stock%20Generalization%20%7C%20Production-Grade&descSize=16&descAlignY=55&descColor=c9d1d9" width="100%" />
 
-![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
-![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=flat-square&logo=tensorflow&logoColor=white)
-![scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=flat-square&logo=scikitlearn&logoColor=white)
-![Pandas](https://img.shields.io/badge/Pandas-150458?style=flat-square&logo=pandas&logoColor=white)
-![NumPy](https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=numpy&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
-![Status](https://img.shields.io/badge/Status-Complete-brightgreen?style=flat-square)
-![Last Commit](https://img.shields.io/github/last-commit/Shrey6876/stock-price-prediction-gru?style=flat-square&color=blue)
+<img src="https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white" alt="Python" />
+<img src="https://img.shields.io/badge/TensorFlow-FF6F00?style=flat-square&logo=tensorflow&logoColor=white" alt="TensorFlow" />
+<img src="https://img.shields.io/badge/scikit--learn-F7931E?style=flat-square&logo=scikitlearn&logoColor=white" alt="scikit-learn" />
+<img src="https://img.shields.io/badge/Pandas-150458?style=flat-square&logo=pandas&logoColor=white" alt="Pandas" />
+<img src="https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=numpy&logoColor=white" alt="NumPy" />
+<img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="License" />
+<img src="https://img.shields.io/badge/Status-Complete-brightgreen?style=flat-square" alt="Status" />
+<img src="https://img.shields.io/github/last-commit/Shrey6876/stock-price-prediction-gru?style=flat-square&color=blue" alt="Last Commit" />
 
 </div>
 
@@ -74,14 +74,14 @@
 ```mermaid
 graph TD
     A[Yahoo Finance API] -->|5yr OHLCV| B[Data Pipeline]
-    B -->|"20 Features"| C["Sequence Generator<br/>(20 timesteps × 20 features)"]
-    C --> D["GRU Layer 1<br/>(64 units)"]
-    D -->|Dropout 0.2| E["GRU Layer 2<br/>(64 units)"]
+    B -->|20 Features| C[Sequence Generator<br/>20 timesteps x 20 features]
+    C --> D[GRU Layer 1<br/>64 units]
+    D -->|Dropout 0.2| E[GRU Layer 2<br/>64 units]
     E --> F[Dense Output]
     F --> G{Signal Engine}
-    G -->|"> +0.5%"| H[📈 BUY]
-    G -->|"< -0.5%"| I[📉 SELL]
-    G -->|"±0.5%"| J[⏸️ HOLD]
+    G -->|more than +0.5%| H[BUY]
+    G -->|less than -0.5%| I[SELL]
+    G -->|within 0.5%| J[HOLD]
     
     style A fill:#1a1b27,stroke:#58a6ff,color:#c9d1d9
     style D fill:#1a1b27,stroke:#f97583,color:#c9d1d9
@@ -303,4 +303,3 @@ MIT License — Copyright © 2026 Shrey Jain
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:1a1b27,50:2e9ef7,100:58a6ff&height=100&section=footer" width="100%" />
 
 </div>
-]]>
